@@ -1,0 +1,661 @@
+/* * * * * * * * * * * * * * * * * * * * *
+ * 
+ * Custom settings for Leaflet pop-ups
+ * 
+ * Kevin Fitzgerald Copyright 2016
+ * 
+ * * * * * * * * * * * * * * * * * * * * */
+
+.aespopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(239, 51, 57, 1) 3px solid;
+}
+.aespopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(239, 51, 57, 1) 2px solid;
+}
+
+.artpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(44, 25, 134, 1) 3px solid;
+}
+.artpopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(44, 25, 134, 1) 2px solid;
+}
+
+.bakepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(130, 77, 60, 1) 3px solid;
+}
+.bakepopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(130, 77, 60, 1) 2px solid;
+}
+
+.bankpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(42, 143, 38, 1) 3px solid;
+}
+.bankpopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(42, 143, 38, 1) 2px solid;
+}
+
+.carrepairpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 0, 0, 1) 3px solid;
+}
+.carrepairpopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 0, 0, 1) 2px solid;
+}
+
+.cheesepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(217, 135, 45, 1) 3px solid;
+}
+.cheesepopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(217, 135, 45, 1) 2px solid;
+}
+
+.chiropopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(237, 51, 101, 1) 3px solid;
+}
+.chiropopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(237, 51, 101, 1) 2px solid;
+}
+
+.churchpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(129, 48, 186, 1) 3px solid;
+}
+.churchpopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(129, 48, 186, 1) 2px solid;
+}
+
+.comppopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 0, 0, 1) 3px solid;
+}
+.comppopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 0, 0, 1) 2px solid;
+}
+
+.cyclepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 52, 255, 1) 3px solid;
+}
+.cyclepopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 52, 255, 1) 2px solid;
+}
+
+.daycarepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(21, 92, 40, 1) 3px solid;
+}
+.daycarepopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(21, 92, 40, 1) 2px solid;
+}
+
+.dentalpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(37, 144, 161, 1) 3px solid;
+}
+.dentalpopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(37, 144, 161, 1) 2px solid;
+}
+
+
+.drycleanpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(61, 117, 152, 1) 3px solid;
+}
+.drycleanpopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(61, 117, 152, 1) 2px solid;
+}
+
+.estatepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(227, 37, 42, 1) 3px solid;
+}
+.estatepopuptitle {
+	width: auto;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(227, 37, 42, 1) 2px solid;
+}
+
+.farmpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(201, 79, 33, 1) 3px solid;
+}
+.farmpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(201, 79, 33, 1) 2px solid;
+}
+
+.financepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(42, 143, 38, 1) 3px solid;
+}
+.financepopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(42, 143, 38, 1) 2px solid;
+}
+
+.generalpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 0, 0, 1) 3px solid;
+}
+.generalpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 0, 0, 1) 2px solid;
+}
+
+.healpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(239, 51, 57, 1) 3px solid;
+}
+.healpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(239, 51, 57, 1) 2px solid;
+}
+
+.icepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(54, 146, 106, 1) 3px solid;
+}
+.icepopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(54, 146, 106, 1) 2px solid;
+}
+.insurepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(35, 94, 209, 1) 3px solid;
+}
+.insurepopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(35, 94, 209, 1) 2px solid;
+}
+
+.landscapepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(21, 112, 51, 1) 3px solid;
+}
+.landscapepopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(21, 112, 51, 1) 2px solid;
+}
+
+.lawpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(202, 65, 46, 1) 3px solid;
+}
+.lawpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(202, 65, 46, 1) 2px solid;
+}
+
+.librarypopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(1, 24, 146, 1) 3px solid;
+}
+.librarypopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(1, 24, 146, 1) 2px solid;
+}
+
+.mensclothingpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(71, 88, 189, 1) 3px solid;
+}
+.mensclothingpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(71, 88, 189, 1) 2px solid;
+}
+
+.municpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 0, 0, 1) 3px solid;
+}
+.municpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 0, 0, 1) 2px solid;
+}
+
+.oilpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 0, 0, 1) 3px solid;
+}
+.oilpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 0, 0, 1) 2px solid;
+}
+
+.pharmpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(239, 51, 57, 1) 3px solid;
+}
+.pharmpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(239, 51, 57, 1) 2px solid;
+}
+
+.physicianpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(225, 64, 122, 1) 3px solid;
+}
+.physicianpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(225, 64, 122, 1) 2px solid;
+}
+
+.pizzapopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(149, 41, 16, 1) 3px solid;
+}
+.pizzapopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(149, 41, 16, 1) 2px solid;
+}
+
+.propopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(35, 94, 209, 1) 3px solid;
+}
+.propopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(35, 94, 209, 1) 2px solid;
+}
+
+.quickpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(57, 127, 122, 1) 3px solid;
+}
+.quickpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(57, 127, 122, 1) 2px solid;
+}
+
+.restpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(52, 41, 62, 1) 3px solid;
+}
+.restpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(52, 41, 62, 1) 2px solid;
+}
+
+.retailpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(167, 85, 166, 1) 3px solid;
+}
+.retailpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(167, 85, 166, 1) 2px solid;
+}
+
+.schoolpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 64, 128, 1) 3px solid;
+}
+.schoolpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 64, 128, 1) 2px solid;
+}
+
+.sewpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(0, 0, 0, 1) 3px solid;
+}
+.sewpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(0, 0, 0, 1) 2px solid;
+}
+
+.shoppopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(95, 71, 190, 1) 3px solid;
+}
+.shoppopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(95, 71, 190, 1) 2px solid;
+}
+
+.sportpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(5, 123, 217, 1) 3px solid;
+}
+.sportpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(5, 123, 217, 1) 2px solid;
+}
+
+.tennispopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(25, 167, 24, 1) 3px solid;
+}
+.tennispopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(25, 167, 24, 1) 2px solid;
+}
+
+.theatrepopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(181, 73, 171, 1) 3px solid;
+}
+.theatrepopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(181, 73, 171, 1) 2px solid;
+}
+
+.vetpopup {
+	padding: 16px 16px 16px 16px;
+	line-height: 1.4;
+	border-radius: 12px;
+	border: rgba(239, 51, 57, 1) 3px solid;
+}
+.vetpopuptitle {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: cursive;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-bottom: 2px;
+    border-bottom: rgba(239, 51, 57, 1) 2px solid;
+}

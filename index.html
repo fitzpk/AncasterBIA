@@ -1,0 +1,2364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title>Ancaster BIA App</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Web mapping application for the local businesses of Ancaster, Ontario">
+<meta name="keywords" content="Ancaster, Local, Business, Franchise, Ontario, GIS, Analysis, Map, Web Mapping, Leaflet, Javascript, GeoJSON">
+<meta name="author" content="Kevin Fitzgerald">
+<link rel="stylesheet" href="css/leaflet.css"/>
+<link rel="stylesheet" href="css/custom-popups.css"/>
+<link rel="stylesheet" href="css/custom-markercluster.css"/>
+<link rel="stylesheet" href="css/styledLayerControl.css" />
+<link rel="stylesheet" href="css/leaflet-search.css" />
+<link rel="stylesheet" href="css/mobile.css" />
+<link rel="stylesheet" href="css/leaflet-search.mobile.src.css" />
+<link rel="stylesheet" href="css/leaflet-condensed-attribution.css" />
+<script src="js/leaflet-src.js"></script>
+<script src="js/leaflet-markercluster.js"></script>
+<script src="js/styledLayerControl.js"></script>
+<script src="js/leaflet-search.js"></script>
+<script src="js/leaflet-condensed-attribution.js"></script>
+<style>
+html, body {
+    padding: 0;
+    margin: 0;
+}
+/*
+#mapcontainer {
+	border: 
+	width: 100vw;
+	height: 100vh;
+}*/
+#map {
+	height: 100vh;
+	width: 100vw;
+}
+#logo {
+	width: 60px;
+	height: 60px;
+}
+.leaflet-div-icon {
+	opacity: 0;
+	}
+.leaflet-marker-icon {
+	color: #fff;
+	font-size: 16px;
+	line-height: 16px;	
+	text-align: center;
+	vertical-align: middle;
+	box-shadow: none;
+}
+.search-tip {
+	white-space: nowrap;
+}
+.search-tip b {
+	display: inline-block;
+	clear: left;
+	float: right;
+	padding: 0 4px;
+	margin-left: 4px;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  border-radius: 26px;
+}
+.leaflet-control-attribution .attributes-body {
+  height: 36px;
+  line-height: 36px;
+}
+.leaflet-control-attribution .attributes-emblem {
+  height: 36px;
+  width: 36px;
+}
+.emblem-wrap, .emblem-wrap img {
+  height: 20px;
+}
+</style>
+</head>
+<body>
+<div id="mapcontainer">
+	<div id="map"> </div>
+</div>
+<script src="geojson/all/ArtMusic_Geojson.js"></script>
+
+<script src="geojson/all/Church_Geojson.js"></script>
+<script src="geojson/all/Municipal_Geojson.js"></script>
+
+<script src="geojson/all/Daycare_Geojson.js"></script>
+<script src="geojson/all/Education_Geojson.js"></script>
+
+<script src="geojson/all/Aes_Geojson.js"></script>
+<script src="geojson/all/Clothing_Geojson.js"></script>
+<script src="geojson/all/Textile_Geojson.js"></script>
+<script src="geojson/all/Retail_Geojson.js"></script>
+
+<script src="geojson/all/Cater_Geojson.js"></script>
+<script src="geojson/all/FastFood_Geojson.js"></script>
+<script src="geojson/all/Grocery_Geojson.js"></script>
+<script src="geojson/all/Rest_Geojson.js"></script>
+<script src="geojson/all/Special_Rest_Geojson.js"></script>
+
+<script src="geojson/all/Fitness_Geojson.js"></script>
+<script src="geojson/all/Sport_Geojson.js"></script>
+
+<script src="geojson/all/Auto_Geojson.js"></script>
+<script src="geojson/all/General_Geojson.js"></script>
+<script src="geojson/all/Tech_Geojson.js"></script>
+<script src="geojson/all/Utility_Geojson.js"></script>
+
+<script src="geojson/all/Chiro_Geojson.js"></script>
+<script src="geojson/all/Dental_Geojson.js"></script>
+<script src="geojson/all/Pharmacy_Geojson.js"></script>
+<script src="geojson/all/Physician_Geojson.js"></script>
+<script src="geojson/all/SpecHeal_Geojson.js"></script>
+<script src="geojson/all/Vet_Geojson.js"></script>
+
+<script src="geojson/all/Advise_Geojson.js"></script>
+<script src="geojson/all/Finance_Geojson.js"></script>
+<script src="geojson/all/Insure_Geojson.js"></script>
+<script src="geojson/all/Estate_Geojson.js"></script>
+<script src="geojson/all/Law_Geojson.js"></script>
+
+<script src="geojson/all/BIA.js"></script>
+
+<script>
+// All Icons Provided By: Maps Icons Collection - https://mapicons.mapsmarker.com
+
+//Symbol for Aesthetic Stores
+var aesIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/dsbb61mpbqxufxs/spa.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Rinks and Arenas
+var arenaIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/qzi1bem8vc1mkys/arena.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Art Stores
+var artIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/i7z3jvqojt4x1f1/museum_art.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for bakeries
+var bakeIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/xnjud8esx45h976/sweetbakery.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for banks
+var bankIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/rez71ads2xamj9y/bank.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Pubs and The Beer Store
+var beerIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/44545c03w94m2dv/beergarden.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});	
+
+//Symbol for Cafes and Coffee Shops
+var cafeIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/bf4o8u9ujlkhkkm/coffee.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Car Repair Services
+var carrepairIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/hevhpwi1n1fb1g0/carrepair.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for cheese shops
+var cheeseIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/e0d0s7pglfqoh2c/cheese.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for chiropractic services
+var chiroIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/kfe66ytqkucwy6u/chiropractor.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Churches
+var churchIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/iii9uszbf9h0cp0/church-2.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Clothing Stores
+var clothingIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/svzmyqzaryfw6t8/clothers_female.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for computer and software technology services
+var compIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/c6jf50t2uz3dsow/computers.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for construction services
+var constructIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/5nzteaswg5wrjv8/construction.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for cycling ir bike stores
+var cycleIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/fslqqmeutc66iuj/cycling.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for dance studios
+var danceIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/yjznscr61cej2q4/dance_class.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for daycares
+var daycareIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/yga17nezkk8d1qe/daycare.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for car dealerships
+var dealerIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/rn7a216zrujmd1y/cardealer.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for dental services
+var dentalIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/8oneqy9laactyqb/dentist.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for drycleaning services
+var drycleanIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/2s5v9r5xsaiugba/dryclean.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for electrical services
+var electricIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/u101n849y8dz4w2/electric.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for engineering and manufacturing services
+var engIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/flmpkqn0ezp50lr/engineer.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for real estate services
+var estateIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/5hcyhgls6z29sgq/realestate.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Farmer's Markets/Farms
+var fairIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/t6o48apmf3wrti2/fair.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Farmer's Markets/Farms
+var farmIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/12l1ctw2pxtljbl/farm.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});	
+
+//Symbol for Fast food restaurants
+var fastIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/4otlsjmyt2qnjd1/fastfood.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for financial services and banks
+var financeIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/1xpauw6o0e1ie66/finance.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Fire Stations
+var fireIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/4iczugvuzercsoq/fire.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Flower Stores
+var flowerIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/befl6hszt0ib7g2/flower.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});	
+
+//Symbol for Food Stores
+var foodIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/8r8lwsypgsmn24b/restaurant.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});	
+
+//Symbol for gas stations
+var gasIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/75hu6x7uue5bp3i/gas.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for General Stores
+var generalIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/pzj5u0op3vpvmt2/general.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Golf Courses and Stores
+var golfIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/n65x5bglhucw03b/golf.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for grocery stores
+var groceryIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/tvpkerryolvw54f/grocery.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Healthcare Services
+var healIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/4egqqvaerpdw0by/heal.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for home decor stores
+var homeIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/jkb9knsq1b22yit/home.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for home decor stores
+var horseIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/zmxicf6ypb7e5l0/horse.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for hotels and inns
+var hotelIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/vovlcde6ornwv3s/hotel.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Ice Cream Shops
+var iceIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/s0l6jtim7yt3r43/icecream.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});	
+
+//Symbol for insurance services
+var insureIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/xihcy0tejsig3bc/insurance.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});	
+
+//Symbol for Jewelry Stores
+var jewelIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/43hetpygtr9620t/jewelry.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for juice bars
+var juiceIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/1oo5z4wru7mprjd/juice.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for legal services
+var landscapeIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/ogz8lnxmwzc6ox7/landscape.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for legal services
+var lawIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/h1ytn4ik99ly8en/law.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Libraries
+var libraryIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/s6hw70rny1qfv56/library.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for post offices and mail services
+var mailIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/933p8dd6m6fy7ti/mail.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for martial arts studios
+var martialIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/flrta2e6n14aicw/martialarts.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Mens clothing stores
+var mensclothingIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/sppkfbmxcjmtfd1/mensclothing.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Community Buildings, Schools and Churches
+var municIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/hlkkp8tb5pieda1/municipal.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Museums
+var museumIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/sid85xrwed2977r/museum.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Music stores & lessons
+var musicIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/28pfhrb2f8x7yd7/music.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Optometry Services
+var optomIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/z3c6pub47sw5s30/optical.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for oil and gas Services
+var oilIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/xmkwetumpy3kga7/oil.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Pet Stores
+var petsIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/dssbn3z3i44c7e6/pets.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for pharmacies
+var pharmIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/huy13ft0d0dphf1/pharmacy.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for photo studios and camera stores
+var photoIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/em8pcedheqv0t3r/photo.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for physicians
+var physicianIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/yj6fhm19iowkt0m/physician.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for physiotherapy clinics
+var physioIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/edqxmv8p1fo6otu/physio.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Pizza Stores
+var pizzaIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/amw2oc2c3go0xhe/pizza.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Indoor playground facilities
+var playIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/iqw7kp18swd3a70/playground.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for pool services
+var poolIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/db0cw1w4093tryx/pool.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Professional Services
+var proIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/2ggz7y0kjwfo0u6/pro.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Convenience Stores
+var quickIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/ma7rca59xdct9e7/quick.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Retail Services
+var retailIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/0yo8aziwsfqi52v/retail.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for sub and sandwich shops
+var sandwichIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/eoincwsoynmp3je/sandwich.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for schools and educational services
+var schoolIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/mwd23v42v26q7xu/school.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Senior Services
+var seniorIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/auplurwg49niubq/senior.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Sewing and Alteration Stores
+var sewIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/sbdvxk5xadq3rxs/sewing.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Shooting Ranges
+var shootIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/qrakggtftsi9qpd/shootingrange.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for soccer services
+var soccerIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/2q0aawym39locb6/soccer.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for fitness centres and sports stores
+var sportIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/8s1vr478sdn7a01/fitness.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Swimming Pools
+var swimIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/hmmpe2uz7m992ln/swim.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for tennis services
+var tennisIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/t6r0jgjajxjme5i/tennis.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Theatres
+var theatreIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/1inaiimiptuq5j5/theater.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Trucking and transportation services
+var transportIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/v3hjmyuteeicrxh/transport.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for travel agencies
+var travelIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/2uhlmy9rnqm727d/travel.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Veterinary Services
+var vetIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/vz9bguw0xfxz058/vet.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for nutrition stores
+var vitaminIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/9htgj3unwccjdfw/vitamin.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Symbol for Car Washes
+var washIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/h8edma0a9rb9uid/carwash.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+	
+//Symbol for Wine Shops
+var wineIcon = L.icon({
+	iconUrl: 'https://dl.dropbox.com/s/qejisz5us7h6e1h/wine.png?dl=0',
+	iconSize: [36, 40],
+	iconAnchor: [17, 35],
+	popupAnchor: [0, -28]
+});
+
+//Customize geojson symbols and labels for the control widget layer group
+mapstyle = {
+	pointToLayer: function(feature, latlng) {
+		
+		//Marker and pop-up for aesthetic stores
+		if (feature.properties.amenity == "Aes")
+			return L.marker(latlng, {
+				icon: aesIcon}).bindPopup('<div class="aespopup"><header class="aespopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+        //Marker and pop-up for arenas and rinks
+		if (feature.properties.amenity == "Arena")
+			return L.marker(latlng, {
+				icon: arenaIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for galleries and art stores
+		if (feature.properties.amenity == "Art")
+			return L.marker(latlng, {
+				icon: artIcon}).bindPopup('<div class="artpopup"><header class="artpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+		
+		//Marker and pop-up for bakers and bakeries
+		if (feature.properties.amenity == "Bake")
+			return L.marker(latlng, {
+				icon: bakeIcon}).bindPopup('<div class="bakepopup"><header class="bakepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for banks
+		if (feature.properties.amenity == "Bank")
+			return L.marker(latlng, {
+				icon: bankIcon}).bindPopup('<div class="bankpopup"><header class="bankpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for beer store and pubs
+		if (feature.properties.amenity == "Beer")
+			return L.marker(latlng, {
+				icon: beerIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for Cafes
+		if (feature.properties.amenity == "Cafe")
+			return L.marker(latlng, {
+				icon: cafeIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for Car Repair Services
+		if (feature.properties.amenity == "Carrepair")
+			return L.marker(latlng, {
+				icon: carrepairIcon}).bindPopup('<div class="carrepairpopup"><header class="carrepairpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for cheese shops
+		if (feature.properties.amenity == "Cheese")
+			return L.marker(latlng, {
+				icon: cheeseIcon}).bindPopup('<div class="cheesepopup"><header class="cheesepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for chiropractors
+		if (feature.properties.amenity == "Chiro")
+			return L.marker(latlng, {
+				icon: chiroIcon}).bindPopup('<div class="chiropopup"><header class="chiropopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+
+		//Marker and pop-up for churches
+		if (feature.properties.amenity == "Church")
+			return L.marker(latlng, {
+				icon: churchIcon}).bindPopup('<div class="churchpopup"><header class="churchpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+
+		//Marker and pop-up for computer and software technology services
+		if (feature.properties.amenity == "Comp")
+			return L.marker(latlng, {
+				tags: ['Franchise'],
+				icon: compIcon}).bindPopup('<div class="comppopup"><header class="comppopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for computer and software technology services
+		if (feature.properties.amenity == "Construct")
+			return L.marker(latlng, {
+				icon: constructIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for cycling or bike stores
+		if (feature.properties.amenity == "Cycle")
+			return L.marker(latlng, {
+				icon: cycleIcon}).bindPopup('<div class="cyclepopup"><header class="cyclepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for dance studios
+		if (feature.properties.amenity == "Dance")
+			return L.marker(latlng, {
+				icon: danceIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for daycare
+		if (feature.properties.amenity == "Daycare")
+			return L.marker(latlng, {
+				icon: daycareIcon}).bindPopup('<div class="daycarepopup"><header class="daycarepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for car dealerships
+		if (feature.properties.amenity == "Dealer")
+			return L.marker(latlng, {
+				icon: dealerIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for dental services
+		if (feature.properties.amenity == "Dental")
+			return L.marker(latlng, {
+				icon: dentalIcon}).bindPopup('<div class="dentalpopup"><header class="dentalpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for dryclean services
+		if (feature.properties.amenity == "Dryclean")
+			return L.marker(latlng, {
+				icon: drycleanIcon}).bindPopup('<div class="drycleanpopup"><header class="drycleanpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for electrical services
+		if (feature.properties.amenity == "Electric")
+			return L.marker(latlng, {
+				icon: electricIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for engineering and manufacturing services
+		if (feature.properties.amenity == "Eng")
+			return L.marker(latlng, {
+				icon: engIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for real estate services
+		if (feature.properties.amenity == "Estate")
+			return L.marker(latlng, {
+				icon: estateIcon}).bindPopup('<div class="estatepopup"><header class="estatepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for fairgrounds
+		if (feature.properties.amenity == "Fair")
+			return L.marker(latlng, {
+				icon: fairIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for farms and the farmers market
+		if (feature.properties.amenity == "Farm")
+			return L.marker(latlng, {
+				icon: farmIcon}).bindPopup('<div class="farmpopup"><header class="farmpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for fast food restaurants
+		if (feature.properties.amenity == "Fast")
+			return L.marker(latlng, {
+				icon: fastIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for financial services
+		if (feature.properties.amenity == "Finance")
+			return L.marker(latlng, {
+				icon: financeIcon}).bindPopup('<div class="financepopup"><header class="financepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for fire stations
+		if (feature.properties.amenity == "Fire")
+			return L.marker(latlng, {
+				icon: fireIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		
+		//Marker and pop-up for flower shops
+		if (feature.properties.amenity == "Flower")
+			return L.marker(latlng, {
+				icon: flowerIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for gas stations
+		if (feature.properties.amenity == "Gas")
+			return L.marker(latlng, {
+				icon: gasIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for general services
+		if (feature.properties.amenity == "General")
+			return L.marker(latlng, {
+				icon: generalIcon}).bindPopup('<div class="generalpopup"><header class="generalpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for golf services
+		if (feature.properties.amenity == "Golf")
+			return L.marker(latlng, {
+				icon: golfIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for grocery stores
+		if (feature.properties.amenity == "Grocery")
+			return L.marker(latlng, {
+				icon: groceryIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for general health services
+		if (feature.properties.amenity == "Heal")
+			return L.marker(latlng, {
+				icon: healIcon}).bindPopup('<div class="healpopup"><header class="healpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for home decor services
+		if (feature.properties.amenity == "Home")
+			return L.marker(latlng, {
+				icon: homeIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for horseback riding and stable services
+		if (feature.properties.amenity == "Horse")
+			return L.marker(latlng, {
+				icon: horseIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for hotels and inns
+		if (feature.properties.amenity == "Hotel")
+			return L.marker(latlng, {
+				icon: hotelIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/		
+		//Marker and pop-up for ice cream shops
+		if (feature.properties.amenity == "Ice")
+			return L.marker(latlng, {
+				icon: iceIcon}).bindPopup('<div class="icepopup"><header class="icepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for insurance services
+		if (feature.properties.amenity == "Insure")
+			return L.marker(latlng, {
+				icon: insureIcon}).bindPopup('<div class="insurepopup"><header class="insurepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*	
+		//Marker and pop-up for jewellery shops
+		if (feature.properties.amenity == "Jewel")
+			return L.marker(latlng, {
+				icon: jewelIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);	
+
+		//Marker and pop-up for juice bars
+		if (feature.properties.amenity == "Juice")
+			return L.marker(latlng, {
+				icon: juiceIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for landscape services
+		if (feature.properties.amenity == "Landscape")
+			return L.marker(latlng, {
+				icon: landscapeIcon}).bindPopup('<div class="landscapepopup"><header class="landscapepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+
+		//Marker and pop-up for legal services
+		if (feature.properties.amenity == "Law")
+			return L.marker(latlng, {
+				icon: lawIcon}).bindPopup('<div class="lawpopup"><header class="lawpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+
+		//Marker and pop-up for libraries
+		if (feature.properties.amenity == "Library")
+			return L.marker(latlng, {
+				icon: libraryIcon}).bindPopup('<div class="librarypopup"><header class="librarypopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for post offices and mail services
+		if (feature.properties.amenity == "Mail")
+			return L.marker(latlng, {
+				icon: mailIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);	
+
+		//Marker and pop-up for martial arts services
+		if (feature.properties.amenity == "Martial")
+			return L.marker(latlng, {
+				icon: martialIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);	
+		*/
+		//Marker and pop-up for mens clothing services
+		if (feature.properties.amenity == "MensClothing")
+			return L.marker(latlng, {
+				icon: mensclothingIcon}).bindPopup('<div class="mensclothingpopup"><header class="mensclothingpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for municipal/community services
+		if (feature.properties.amenity == "Munic")
+			return L.marker(latlng, {
+				icon: municIcon}).bindPopup('<div class="municpopup"><header class="municpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+		/*
+		//Marker and pop-up for museums
+		if (feature.properties.amenity == "Museum")
+			return L.marker(latlng, {
+				icon: museumIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		
+		//Marker and pop-up for music services
+		if (feature.properties.amenity == "Music")
+			return L.marker(latlng, {
+				icon: musicIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);	
+		*/
+		//Marker and pop-up for oil and natural gas services
+		if (feature.properties.amenity == "Oil")
+			return L.marker(latlng, {
+				icon: oilIcon}).bindPopup('<div class="oilpopup"><header class="oilpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+		/*
+		//Marker and pop-up for optometry services
+		if (feature.properties.amenity == "Optom")
+			return L.marker(latlng, {
+				icon: optomIcon}).bindPopup('<div class="optompopup"><header class="optompopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+			
+		//Marker and pop-up for pet stores
+		if (feature.properties.amenity == "Pets")
+			return L.marker(latlng, {
+				icon: petsIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for pharmacies
+		if (feature.properties.amenity == "Pharm")
+			return L.marker(latlng, {
+				icon: pharmIcon}).bindPopup('<div class="pharmpopup"><header class="pharmpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for photo studios and camera stores
+		if (feature.properties.amenity == "Photo")
+			return L.marker(latlng, {
+				icon: photoIcon}).bindPopup('<div class="photopopup"><header class="photopopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		*/
+		//Marker and pop-up for pharmacies
+		if (feature.properties.amenity == "Physician")
+			return L.marker(latlng, {
+				icon: physicianIcon}).bindPopup('<div class="physicianpopup"><header class="physicianpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for physiotherapy clinics
+		if (feature.properties.amenity == "Physio")
+			return L.marker(latlng, {
+				icon: physioIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for pizza shops
+		if (feature.properties.amenity == "Pizza")
+			return L.marker(latlng, {
+				icon: pizzaIcon}).bindPopup('<div class="pizzapopup"><header class="pizzapopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for indoor playgrounds
+		if (feature.properties.amenity == "Play")
+			return L.marker(latlng, {
+				icon: playIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for pool services
+		if (feature.properties.amenity == "Pool")
+			return L.marker(latlng, {
+				icon: poolIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for professional services
+		if (feature.properties.amenity == "Pro")
+			return L.marker(latlng, {
+				icon: proIcon}).bindPopup('<div class="propopup"><header class="propopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+				
+		//Marker and pop-up for convenience stores
+		if (feature.properties.amenity == "Quick")
+			return L.marker(latlng, {
+				icon: quickIcon}).bindPopup('<div class="quickpopup"><header class="quickpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for restaurants
+		if (feature.properties.amenity == "Rest")
+			return L.marker(latlng, {
+				icon: foodIcon}).bindPopup('<div class="restpopup"><header class="restpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for retail stores
+		if (feature.properties.amenity == "Retail")
+			return L.marker(latlng, {
+				icon: retailIcon}).bindPopup('<div class="retailpopup"><header class="retailpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for sub and sandwich shops
+		if (feature.properties.amenity == "Sandwich")
+			return L.marker(latlng, {
+				icon: sandwichIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for schools and educational services
+		if (feature.properties.amenity == "School")
+			return L.marker(latlng, {
+				icon: schoolIcon}).bindPopup('<div class="schoolpopup"><header class="schoolpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for senior homes and retirement centres
+		if (feature.properties.amenity == "Senior")
+			return L.marker(latlng, {
+				icon: seniorIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for fabric stores and alterations
+		if (feature.properties.amenity == "Sew")
+			return L.marker(latlng, {
+				icon: sewIcon}).bindPopup('<div class="sewpopup"><header class="sewpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for shooting ranges
+		if (feature.properties.amenity == "Shoot")
+			return L.marker(latlng, {
+				icon: shootIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for clothing stores
+		if (feature.properties.amenity == "Shop")
+			return L.marker(latlng, {
+				icon: clothingIcon}).bindPopup('<div class="shoppopup"><header class="shoppopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for soccer services
+		if (feature.properties.amenity == "Soccer")
+			return L.marker(latlng, {
+				icon: soccerIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for sporting stores, ballparks, etc.
+		if (feature.properties.amenity == "Sport")
+			return L.marker(latlng, {
+				icon: sportIcon}).bindPopup('<div class="sportpopup"><header class="sportpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		/*
+		//Marker and pop-up for swimming pools and aquatic centres
+		if (feature.properties.amenity == "Swim")
+			return L.marker(latlng, {
+				icon: swimIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/
+		//Marker and pop-up for tennis services
+		if (feature.properties.amenity == "Tennis")
+			return L.marker(latlng, {
+				icon: tennisIcon}).bindPopup('<div class="tennispopup"><header class="tennispopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');
+		
+		//Marker and pop-up for theatres
+		if (feature.properties.amenity == "Theatre")
+			return L.marker(latlng, {
+				icon: theatreIcon}).bindPopup('<div class="theatrepopup"><header class="theatrepopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+		/*
+		//Marker and pop-up for trucking and transportation services
+		if (feature.properties.amenity == "Transport")
+			return L.marker(latlng, {
+				icon: transportIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+			
+		//Marker and pop-up for trucking and transportation services
+		if (feature.properties.amenity == "Travel")
+			return L.marker(latlng, {
+				icon: travelIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+		*/	
+		//Marker and pop-up for veterinary services
+		if (feature.properties.amenity == "Vet")
+			return L.marker(latlng, {
+				icon: vetIcon}).bindPopup('<div class="vetpopup"><header class="vetpopuptitle">'+feature.properties.name+'</header>'
+				+'<br><br>'+'<img id="link" class="popupicon" src="css/images/road.png"/> '+feature.properties.address+'<br><br>'
+			+'<img id="link" class="popupicon" src="css/images/earphone.png"/> '+feature.properties.phone+'<br><br>'
+			+'<div class="popuplink"><img id="link" class="popupicon" src="css/images/link.png"/> '+feature.properties.url+'</div></div>');	
+		/*
+		//Marker and pop-up for nutrition stores
+		if (feature.properties.amenity == "Vitamin")
+			return L.marker(latlng, {
+				icon: vitaminIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);	
+
+		//Marker and pop-up for car wash stations
+		if (feature.properties.amenity == "Wash")
+			return L.marker(latlng, {
+				icon: washIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);
+
+		//Marker and pop-up for wine shops
+		if (feature.properties.amenity == "Wine")
+			return L.marker(latlng, {
+				icon: wineIcon}).bindPopup('<b>'+feature.properties.name+'</b>'+'<br><br>'+'Address: '+feature.properties.address+'<br><br>'
+			+'Phone: '+feature.properties.phone+'<br><br>' + feature.properties.url);	*/	
+		}
+	};
+	
+	var mbAttr = 'KPF &copy 2017 | ' +
+				 'Basemaps & Imagery Provided By: <a href="http://mapbox.com">Mapbox</a> and <a href="http://google.com">Google</a>',
+		mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw';
+
+	var grayscale = L.tileLayer(mbUrl, {maxZoom: 20, id: 'mapbox.satellite', attribution: mbAttr}),
+		streets = L.tileLayer(mbUrl, {maxZoom: 20, id: 'mapbox.streets', attribution: mbAttr}),
+		comic = L.tileLayer(mbUrl, {maxZoom: 20, id: 'mapbox.comic', attribution: mbAttr});
+		
+	var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+	    maxZoom: 20,
+	    subdomains:['mt0','mt1','mt2','mt3']
+	});
+	
+	function biastyle(feature) {
+	    return {
+	        weight: 3,
+	        opacity: 1,
+	        color: 'white',
+	        fillOpacity: 0.6
+	    };
+	}
+	
+	var bia = L.geoJson(bia, {style: biastyle});
+	
+	//Create map
+	var map = L.map('map', {
+		center: [43.230218, -79.976821],
+		zoom: 15,
+		condensedAttributionControl: false,
+		layers: [streets, bia]
+	});
+	
+	// set custom emblem and prefix
+    L.control.condensedAttribution({
+      emblem: '<div class="emblem-wrap"><img src="https://dl.dropbox.com/s/wfb75jezonbwgi2/info.png?dl=0"/></div>',
+      prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+    }).addTo(map);
+	
+	//Cluster and Layer Creation - create cluster group, customize cluster icon, create layer with custom marker icons, add layer to cluster group
+	//Group 1
+	//Aesthetic Businesses
+	var aesclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'aescluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var aeslyr = L.geoJson(aes, mapstyle);        
+    aesclus.addLayer(aeslyr);
+		
+	//Clothing and Textile Businesses
+	var clothingclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'clothingcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+		        }
+		        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+		    }
+		});
+        var clothinglyr = L.geoJson(clothing, mapstyle)        
+        clothingclus.addLayer(clothinglyr);
+   	/*
+    //Design and Home Decor Businesses
+	var designclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'designcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var designlyr = L.geoJson(design, mapstyle)        
+    designclus.addLayer(designlyr);
+    */
+    //Retail Businesses
+ 	var retailclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'retailcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var retaillyr = L.geoJson(retail, mapstyle)        
+    retailclus.addLayer(retaillyr);
+	
+    //Alteration, Dry Cleaning, and Textile Businesses
+ 	var textileclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'textilecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var textilelyr = L.geoJson(textile, mapstyle)        
+    textileclus.addLayer(textilelyr);  
+   
+	//Group 2
+	//Art and Music Businesses
+ 	/*var artmusicclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'artmusiccluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});*/
+    var artmusiclyr = L.geoJson(artmusic, mapstyle);        
+    //artmusicclus.addLayer(artmusiclyr);
+    /*
+    //Theatre and Entertainment Businesses
+    var theatreclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'theatrecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var theatrelyr = L.geoJson(theatre, mapstyle)        
+    theatreclus.addLayer(theatrelyr);
+    */
+    //Group 3
+	//Fitness and Nutrition Businesses
+    var fitnessclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'fitnesscluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var fitnesslyr = L.geoJson(fitness, mapstyle)        
+    fitnessclus.addLayer(fitnesslyr);
+    
+    //Sport Academies and Sporting Businesses
+    var sportclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'sportcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var sportlyr = L.geoJson(sport, mapstyle)        
+    sportclus.addLayer(sportlyr);
+    
+    //Group 4
+    //Churches and Religious Services
+    var churchclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'churchcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var churchlyr = L.geoJson(church, mapstyle)        
+    churchclus.addLayer(churchlyr);
+	
+    //Municipal Services
+    var municipalclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'municipalcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var municipallyr = L.geoJson(municipal, mapstyle)        
+    municipalclus.addLayer(municipallyr);
+    /*
+    //Fire Stations & Emergency Services
+    var emergencyclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'emergencycluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var emergencylyr = L.geoJson(emergency, mapstyle)        
+    emergencyclus.addLayer(emergencylyr);
+
+    //Postal Services
+    var postalclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'postalcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var postallyr = L.geoJson(postal, mapstyle)        
+    postalclus.addLayer(postallyr);
+    */
+    //Group 5
+    //Daycare Services
+    var daycareclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'daycarecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var daycarelyr = L.geoJson(daycare, mapstyle)        
+    daycareclus.addLayer(daycarelyr);
+    
+    //Schools and Educational Services
+    var educationclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'educationcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var educationlyr = L.geoJson(education, mapstyle)        
+    educationclus.addLayer(educationlyr);
+    /*
+    //Driving Schools
+    var edudriveclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'edudrivecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var edudrivelyr = L.geoJson(edudrive, mapstyle)        
+    edudriveclus.addLayer(edudrivelyr);
+    */
+    //Group 6
+    //Farmers Markets and Grocery Stores
+    var groceryclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'grocerycluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var grocerylyr = L.geoJson(grocery, mapstyle)        
+    groceryclus.addLayer(grocerylyr);
+    
+    //Restaurants and Lodging Services
+    var restclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'restcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var restlyr = L.geoJson(rest, mapstyle)        
+    restclus.addLayer(restlyr);
+	/*
+    //Alcohol Vendors
+    var alcoholclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'alcoholcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var alcohollyr = L.geoJson(alcohol, mapstyle)        
+    alcoholclus.addLayer(alcohollyr);
+    */
+    //Bakeries and Catering Services
+    var caterclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'catercluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var caterlyr = L.geoJson(cater, mapstyle)        
+    caterclus.addLayer(caterlyr);
+	/*
+    //Breakfast Cafes and Coffee Shops
+    var cafeclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'cafecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var cafelyr = L.geoJson(cafe, mapstyle)        
+    cafeclus.addLayer(cafelyr);
+	*/
+    //Fast Food Restaurants and Convenience Stores
+    var fastfoodclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'fastfoodcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var fastfoodlyr = L.geoJson(fastfood, mapstyle)        
+    fastfoodclus.addLayer(fastfoodlyr);
+	
+    //Specialty Food Services
+    var specrestclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'specrestcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var specrestlyr = L.geoJson(specrest, mapstyle)        
+    specrestclus.addLayer(specrestlyr);
+   
+    //Group 7
+    //Automotive and Gas Services
+    var autogasclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'autogascluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var autogaslyr = L.geoJson(autogas, mapstyle)        
+    autogasclus.addLayer(autogaslyr);
+    /*
+    //Manufacturing and Engineering Services
+    var manuengclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'manuengcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var manuenglyr = L.geoJson(manueng, mapstyle)        
+    manuengclus.addLayer(manuenglyr);
+    
+    //Landscaping and Home Maintenance Services
+    var landmainclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'landmaincluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var landmainlyr = L.geoJson(landmain, mapstyle)        
+    landmainclus.addLayer(landmainlyr);
+    */
+    //Extra General Services or Specialty Services
+    var generalclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'generalcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var generallyr = L.geoJson(general, mapstyle)        
+    generalclus.addLayer(generallyr);
+    
+    //Science and Computer Services
+    var techclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'techcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var techlyr = L.geoJson(tech, mapstyle)        
+    techclus.addLayer(techlyr);
+    
+    //Utility and Construction Services
+    var utilityclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'utilitycluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var utilitylyr = L.geoJson(utility, mapstyle)        
+    utilityclus.addLayer(utilitylyr);
+    
+    //Group 8
+    //Chiropractic Services
+    var chiroclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'chirocluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var chirolyr = L.geoJson(chiro, mapstyle)        
+    chiroclus.addLayer(chirolyr);
+	/*
+    //Physio Services
+    var physioclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'physiocluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var physiolyr = L.geoJson(physio, mapstyle)        
+    physioclus.addLayer(physiolyr);
+    */
+   //Dental Services
+    var dentalclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'dentalcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var dentallyr = L.geoJson(dental, mapstyle)        
+    dentalclus.addLayer(dentallyr);
+    /*
+    //Optical Services
+    var opticalclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'opticalcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var opticallyr = L.geoJson(optical, mapstyle)        
+    opticalclus.addLayer(opticallyr);
+    */
+    //Pharmacies
+    var pharmacyclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'pharmacycluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var pharmacylyr = L.geoJson(pharmacy, mapstyle)        
+    pharmacyclus.addLayer(pharmacylyr);
+    
+    //Physicians
+    var physicianclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'physiciancluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var physicianlyr = L.geoJson(physician, mapstyle)        
+    physicianclus.addLayer(physicianlyr);
+    
+    //Specialty Health Services
+    var spechealclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'spechealcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var specheallyr = L.geoJson(specheal, mapstyle)        
+    spechealclus.addLayer(specheallyr);
+    
+    //Veterinary and Pet Services
+    var vetclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'vetcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var vetlyr = L.geoJson(vet, mapstyle)        
+    vetclus.addLayer(vetlyr);
+
+    //Group 9
+	//Advisory and Consulting Businesses
+    var adviseclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'procluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var adviselyr = L.geoJson(advise, mapstyle)        
+    adviseclus.addLayer(adviselyr);
+
+  	//Financial Services
+    var financeclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'financecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var financelyr = L.geoJson(finance, mapstyle)        
+    financeclus.addLayer(financelyr);
+  
+    //Legal Services
+    var lawclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'lawcluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var lawlyr = L.geoJson(law, mapstyle)        
+    lawclus.addLayer(lawlyr);
+  
+    //Insurance Services
+    var insureclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'insurecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var insurelyr = L.geoJson(insure, mapstyle)        
+    insureclus.addLayer(insurelyr);
+
+    //Real Estate Services
+    var estateclus = new L.MarkerClusterGroup({
+	    iconCreateFunction: function (cluster) {
+	        var childCount = cluster.getChildCount();
+	        var c = 'estatecluster-';
+	        if (childCount < 10) {
+	            c += 'small';
+	        } else if (childCount < 20) {
+	            c += 'medium';
+	        } else {
+	            c += 'large';
+	        }
+	        return new L.DivIcon({ html: childCount, className: c, iconSize: null });
+	    }
+	});
+    var estatelyr = L.geoJson(estate, mapstyle)        
+    estateclus.addLayer(estatelyr);
+
+	var baseMaps = [
+			       	 { 
+						groupName: "<b>Base Maps</b>",
+						expanded: false,
+						layers: {
+						"Streets":  streets,
+						"Satellite Imagery": googleSat,
+						"Comic-Style": comic
+						}
+				    }							
+				];
+					
+	var overlays = [
+				    {
+						groupName : "Aesthetic, Design, & Retail Services",
+						expanded : false,
+						layers    : { 
+						"Aesthetics & Spas": aesclus,
+						"Fashion": clothingclus,
+						"Alterations, Dry Cleaning, & Textile Services": textileclus,
+						//"Design & Home Decor": designclus,
+						"Specialty Retail Services": retailclus,
+			     	  }	
+                  },{
+						groupName : "Arts & Entertainment",
+						expanded : false,
+						layers    : { 
+						"Arts & Music": artmusiclyr,
+						//"Theatre & Entertainment": theatreclus,
+					  }	
+                  },{
+						groupName : "Athletics & Fitness",
+						expanded : false,
+						layers    : { 
+						"Fitness Centres & Nutrition Stores": fitnessclus,
+						"Sport Academies, Clubs, & Stores": sportclus		
+				      }	
+                  },{
+						groupName : "Churches & Community Services",
+						expanded : false,
+						layers    : { 
+						"Churches & Places of Worship": churchclus,
+						"Community Services": municipalclus,
+						//"Fire Stations & Emergency Services": emergencyclus,
+						//"Postal Services": postalclus,
+					  }	
+                  },{
+						groupName : "Educational Services",
+						expanded : false,
+						layers    : { 
+						"Daycare/Child Care Services": daycareclus,
+						"Schools & Private Educational Services": educationclus,
+						//"Driving Schools": edudriveclus
+					  }	
+                  },{
+						groupName : "Food & Drink Services",
+						expanded : false,
+						layers    : { 
+						"Grocery Stores & Farmer's Markets": groceryclus,
+						"Restaurants & Lodges": restclus,
+						//"Alcohol Vendors": alcoholclus,
+						"Bakeries & Catering Services": caterclus,
+						//"Breakfast Cafes & Coffee Shops": cafeclus,
+						"Fast Food & Convenience Stores": fastfoodclus,
+						"Specialty Food Services": specrestclus	
+					   }	
+                  },{
+						groupName : "General Services",
+						expanded : false,
+						layers    : {
+						"Automotive & Gas Services": autogasclus,
+						//"Engineering & Manufacturing Services": manuengclus,
+						//"Landscaping & Home Maintenance Services": landmainclus,
+						"Specialty Services": generalclus,
+						"Science & Computer Services": techclus,
+						"Utility & Construction Services": utilityclus
+					   }	
+                  },{
+						groupName : "Health Services",
+						expanded : false,
+						layers    : { 
+					    "Chiropractic Services": chiroclus,
+					    //"Physiotherapy Services": physioclus,
+						"Dental Services": dentalclus,	
+						//"Optical Services": opticalclus,
+						"Pharmacies": pharmacyclus,
+						"Physicians": physicianclus,
+						"Specialty Health Services": spechealclus,
+						"Veterinary & Pet Services": vetclus,
+					   }	
+                  },{
+						groupName : "Professional Services",
+						expanded : false,
+						layers    : { 
+						"Financial Services": financeclus,
+						"Legal Services": lawclus,
+						"Insurance Services": insureclus,
+						"Real Estate Services": estateclus,
+						"Specialized Services": adviseclus,
+					   }	
+                  }						 
+			];
+	
+	//Options/setting needed for the styled layer control widget	
+	var options = {
+		autoResize: true,
+		group_maxHeight: "225px",
+		//container_maxHeight : "350px", 
+		exclusive: false,
+		collapsed: true, 
+		position: 'topright'
+	};
+
+	//Create styled layer control widget
+	var control = L.Control.styledLayerControl(baseMaps, overlays, options);
+	map.addControl(control);
+	
+	//Allows for the user to scroll through the layer control on mobile devices
+	if (!L.Browser.touch) {
+	  L.DomEvent
+	  .disableClickPropagation(control._container)
+	  .disableScrollPropagation(control._container);
+	} else {
+	  L.DomEvent.disableClickPropagation(control._container);
+	}	
+
+	//Customize geojson symbols and labels for the search widget layer group
+	//Features are set to transparent because of the conflicting layer groups
+	searchstyle = {
+		pointToLayer: function(feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.divIcon({iconSize: L.point(6, 6),
+				})
+			})
+		}
+	};
+	
+	// Create layer group for the search widget, insert style settings
+	var poiLayers = L.layerGroup([
+		L.geoJson(artmusic, searchstyle),
+		
+		L.geoJson(daycare, searchstyle),
+		L.geoJson(education, searchstyle),
+		//L.geoJson(theatre, searchstyle),
+		/*
+		L.geoJson(edudrive, searchstyle),
+		
+		L.geoJson(emergency, searchstyle),
+		L.geoJson(postal, searchstyle),
+		
+		*/
+		L.geoJson(church, searchstyle),
+		L.geoJson(municipal, searchstyle),
+		
+		L.geoJson(fitness, searchstyle),
+		L.geoJson(sport, searchstyle),
+		
+		
+		L.geoJson(grocery, searchstyle),
+		L.geoJson(rest, searchstyle),
+		L.geoJson(specrest, searchstyle),
+		L.geoJson(cater, searchstyle),
+		L.geoJson(fastfood, searchstyle),
+		
+		L.geoJson(chiro, searchstyle),
+		L.geoJson(dental, searchstyle),
+		L.geoJson(pharmacy, searchstyle),
+		L.geoJson(physician, searchstyle),
+		L.geoJson(specheal, searchstyle),
+		L.geoJson(vet, searchstyle),
+		/*
+		L.geoJson(alcohol, searchstyle),
+		L.geoJson(cafe, searchstyle),
+		
+		L.geoJson(physio, searchstyle),
+		L.geoJson(optical, searchstyle),
+		
+		*/
+		L.geoJson(aes, searchstyle),
+		L.geoJson(clothing, searchstyle),
+		L.geoJson(textile, searchstyle),
+		L.geoJson(retail, searchstyle),
+		/*
+		L.geoJson(design, searchstyle),
+		
+		L.geoJson(manueng, searchstyle),
+		L.geoJson(landmain, searchstyle),
+		*/
+		L.geoJson(autogas, searchstyle),
+		L.geoJson(general, searchstyle),
+		L.geoJson(tech, searchstyle),
+		L.geoJson(utility, searchstyle),
+		
+		L.geoJson(advise, searchstyle),
+		L.geoJson(finance, searchstyle),
+		L.geoJson(insure, searchstyle),
+		L.geoJson(estate, searchstyle),
+		L.geoJson(law, searchstyle),
+	]);
+
+	//Create search widget wth layer group and add it to the map
+	L.control.search({
+		layer: poiLayers,
+		initial: false,
+		propertyName: 'name'
+	}).addTo(map);
+	
+	//Layers are removed from map to improve functionality (speed) on mobile devices
+	map.removeLayer(poiLayers);
+	
+	//Add Ancaster Village Logo to Map
+    var logo = L.control({position: 'bottomleft'});
+    logo.onAdd = function(map){
+        var div = L.DomUtil.create('div', 'myclass');
+        div.innerHTML= "<img id='logo' src='http://www.shopancasterfarmersmarket.com/bia-dev/wp-content/uploads/2015/08/logo-enclosed.png'/>";
+        return div;
+    }
+    logo.addTo(map);		
+  </script>
+</body>
+</html>

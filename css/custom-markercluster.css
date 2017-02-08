@@ -1,0 +1,1301 @@
+/* * * * * * * * * * * * * * * * * * * * * 
+* Customized Marker Cluster Styles 
+* 
+* Kevin Fitzgerald Copyright 2016
+* 
+* * * * * * * * * * * * * * * * * * * * */
+
+.aescluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255,255,240, 1);
+    border-radius: 20px;
+    background-color: rgba(241, 211, 87, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.aescluster-medium, .aescluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255,255,240, 1);
+    background-color: rgba(241, 211, 87, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.clothingcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255,255,240, 1);
+    border-radius: 20px;
+    background-color: rgba(70,130,180, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.clothingcluster-medium, .clothingcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255,255,240, 1);
+    background-color: rgba(70,130,180, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.designcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255,255,240, 1);
+    border-radius: 20px;
+    background-color: rgba(205,92,92, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.designcluster-medium, .designcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255,255,240, 1);
+    background-color: rgba(205,92,92, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.retailcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255,255,240, 1);
+    border-radius: 20px;
+    background-color: rgba(143,188,143, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.retailcluster-medium, .retailcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255,255,240, 1);
+    background-color: rgba(143,188,143, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.textilecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255,255,240, 1);
+    border-radius: 20px;
+    background-color: rgba(75,64,67, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.textilecluster-medium, .textilecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255,255,240, 1);
+    background-color: rgba(75,64,67, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.artmusiccluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(192,192,192, 1);
+    border-radius: 20px;
+    background-color: rgba(72,209,204, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.artmusiccluster-medium, .artmusiccluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(192,192,192, 1);
+    background-color: rgba(72,209,204, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.theatrecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(192,192,192, 1);
+    border-radius: 20px;
+    background-color: rgba(233,84,84, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.theatrecluster-medium, .theatrecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(192,192,192, 1);
+    background-color: rgba(233,84,84, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.fitnesscluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(124, 160, 232, 1);
+    border-radius: 20px;
+    background-color: rgba(2,118,139, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.fitnesscluster-medium, .fitnesscluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(124, 160, 232, 1);
+    background-color: rgba(2,118,139, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.sportcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(124, 160, 232, 1);
+    border-radius: 20px;
+    background-color: rgba(75,64,67, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.sportcluster-medium, .sportcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(124, 160, 232, 1);
+    background-color: rgba(75,64,67, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.churchcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(31,209,209, 1);
+    border-radius: 20px;
+    background-color: rgba(75,64,67, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.churchcluster-medium, .churchcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(31,209,209, 1);
+    background-color: rgba(75,64,67, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.municipalcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(31,209,209, 1);
+    border-radius: 20px;
+    background-color: rgba(0, 76, 153, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.municipalcluster-medium, .municipalcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(31,209,209, 1);
+    background-color: rgba(0, 76, 153, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.emergencycluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(31,209,209, 1);
+    border-radius: 20px;
+    background-color: rgba(250, 102, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.emergencycluster-medium, .emergencycluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(31,209,209, 1);
+    background-color: rgba(250, 102, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.postalcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(31,209,209, 1);
+    border-radius: 20px;
+    background-color: rgba(64, 146, 107, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.postalcluster-medium, .postalcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(31,209,209, 1);
+    background-color: rgba(64, 146, 107, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.daycarecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 121, 183, 1);
+    border-radius: 20px;
+    background-color: rgba(108,199,166, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.daycarecluster-medium, .daycarecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 121, 183, 1);
+    background-color: rgba(108,199,166, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.educationcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 121, 183, 1);
+    border-radius: 20px;
+    background-color: rgba(102, 0, 0, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.educationcluster-medium, .educationcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 121, 183, 1);
+    background-color: rgba(102, 0, 0, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.edudrivecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 121, 183, 1);
+    border-radius: 20px;
+    background-color: rgba(148, 101, 195, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.edudrivecluster-medium, .edudrivecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 121, 183, 1);
+    background-color: rgba(148, 101, 195, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.grocerycluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(0, 102, 204, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.grocerycluster-medium, .grocerycluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(0, 102, 204, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.restcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(96, 96, 96, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.restcluster-medium, .restcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(96, 96, 96, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.alcoholcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(92, 48, 48, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.alcoholcluster-medium, .alcoholcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(92, 48, 48, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.catercluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(53, 208, 213, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.catercluster-medium, .catercluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(53, 208, 213, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.cafecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(222, 100, 100, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.cafecluster-medium, .cafecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(222, 100, 100, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.fastfoodcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(148, 101, 195, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.fastfoodcluster-medium, .fastfoodcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(148, 101, 195, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.specrestcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    border-radius: 20px;
+    background-color: rgba(85, 191, 148, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.specrestcluster-medium, .specrestcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(49, 85, 55, 1);
+    background-color: rgba(85, 191, 148, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.autogascluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(25, 0, 51, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.autogascluster-medium, .autogascluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    background-color: rgba(25, 0, 51, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.manuengcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(64, 64, 64, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.manuengcluster-medium, .manuengcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    background-color: rgba(64, 64, 64, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.landmaincluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(0, 153, 76, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.landmaincluster-medium, .landmaincluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    background-color: rgba(0, 153, 76, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.generalcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(0, 76, 153, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.generalcluster-medium, .generalcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    background-color: rgba(0, 76, 153, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.techcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(255, 51, 51, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.techcluster-medium, .techcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    background-color: rgba(255, 51, 51, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.utilitycluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(255, 128, 0, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.utilitycluster-medium, .utilitycluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 178, 102, 1);
+    background-color: rgba(255, 128, 0, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.chirocluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(64, 64, 64, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.chirocluster-medium, .chirocluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(64, 64, 64, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.physiocluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(0, 51, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.physiocluster-medium, .physiocluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(0, 51, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.dentalcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(72, 131, 199, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.dentalcluster-medium, .dentalcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(72, 131, 199, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.opticalcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(148, 101, 195, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.opticalcluster-medium, .opticalcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(148, 101, 195, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.pharmacycluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(160, 160, 160, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.pharmacycluster-medium, .pharmacycluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(160, 160, 160, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.physiciancluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(255, 156, 156, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.physiciancluster-medium, .physiciancluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(255, 156, 156, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.spechealcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(255, 178, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.spechealcluster-medium, .spechealcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(255, 178, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.vetcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    border-radius: 20px;
+    background-color: rgba(0, 204, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.vetcluster-medium, .vetcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(255, 102, 102, 1);
+    background-color: rgba(0, 204, 102, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.procluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    border-radius: 20px;
+    background-color: rgba(45,65,164, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.procluster-medium, .procluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    background-color: rgba(45,65,164, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.financecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    border-radius: 20px;
+    background-color: rgba(32, 112, 70, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.financecluster-medium, .financecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    background-color: rgba(32, 112, 70, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.lawcluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    border-radius: 20px;
+    background-color: rgba(112, 184, 255, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.lawcluster-medium, .lawcluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    background-color: rgba(112, 184, 255, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.insurecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    border-radius: 20px;
+    background-color: rgba(164, 45, 45, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.insurecluster-medium, .insurecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    background-color: rgba(164, 45, 45, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.estatecluster-small{
+	background-clip: padding-box;
+	padding-top: 5px;
+	padding-bottom: 1px;
+    width: 24px;
+    height: 20px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    border-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.estatecluster-medium, .estatecluster-large{
+	background-clip: padding-box;
+	padding-top: 9px;
+	padding-left: 1px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+    width: 32px;
+    height: 24px;
+    border-radius: 30px;
+    border: 5px solid rgba(64, 64, 64, 1);
+    background-color: rgba(128, 128, 128, 0.6);
+    text-align: center;
+    vertical-align: center;
+    color: #FFF;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
